@@ -24,7 +24,13 @@
  *                      type: string
  *                  long_desc:
  *                      type: string
- *       
+ *          Delete:
+ *              type: object
+ *              required:
+ *                  -   id
+ *              properties:
+ *                  id:
+ *                      type: string
  */
 
 
@@ -58,6 +64,14 @@
  *      summary : delete blog
  *      tags:
  *          -   Blog
+ *      requestBody:
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Delete'
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Delete'
  *      responses:
  *          200:
  *              description: success
