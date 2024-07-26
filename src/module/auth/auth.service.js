@@ -31,7 +31,7 @@ class AuthService{
             const timeRemain = (user.otp.expiresIn - now)/1000
             return {
                 error : new createHttpError.BadRequest(authMessage.OtpNotExpired).message,
-                timeLeft : timeRemain
+                timeLeft : `${timeRemain} second`
             }
         }
         const otp = {
@@ -39,7 +39,10 @@ class AuthService{
             expiresIn : now + (1000 * 60 *5)
         }
         await userModel.updateOne({mobile},{otp : otp, verifiedMobile : false})
-        return authMessage.OtpUpdated 
+        return {
+            result : authMessage.OtpUpdated,
+            timeLeft : `${otp.expiresIn - now} second`
+         }
     }
     async checkOTP(mobile , code){
         const user = await this.#checkExistByMobile(mobile)
