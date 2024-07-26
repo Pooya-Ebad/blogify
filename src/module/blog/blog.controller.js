@@ -20,7 +20,7 @@ class BlogController {
     }
     async delete (req, res, next) {
         try {
-            const id = req.user.id
+            const {id} = req.body
             const result = await this.#service.delete(id);
             return res.json(result);
         } catch (error) {
